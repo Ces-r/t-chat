@@ -1,11 +1,8 @@
+// a simple example using web sockets, two users can communicate with each other through HTML paragraphs.
+
 const testo = document.getElementById("testo")
 const form = document.getElementById("form")
 const cursor = document.querySelector('.cursor');
-
-
-const PORT = 8080;
-const IP = ' 192.168.1.86'
-
 
 const ws = new WebSocket(`ws://${window.location.hostname}:8080`);
 

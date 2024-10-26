@@ -47,13 +47,16 @@ wss.on('connection', (ws) => {
 
 
 
-//route 
+//routes
 app.get('/', async (req, res) => {
     return res.render("home")
 
 });
 
 
+app.get('/chat', (req, res) => {
+    return res.render("chat")
+})
 
 
 
