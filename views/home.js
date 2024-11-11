@@ -4,7 +4,7 @@ const testo = document.getElementById("testo")
 const form = document.getElementById("form")
 const cursor = document.querySelector('.cursor');
 
-const ws = new WebSocket(`ws://${window.location.hostname}:8080`);
+const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}`);
 
  // Declare the message element
 let messageElement;    
