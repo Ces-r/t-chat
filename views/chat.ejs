@@ -3,30 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat thingy</title>
+    <title>Chatroom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="chat.css">
 </head>
-<body class="p-3 mb-2 bg-dark text-white">
+<body id="everything" class="p-3 mb-2 bg-white text-dark">
     <div class="container">
-        <h1 class="">Current messages: </h1>
+        <h1 class=""></h1>
 
 
-        <div class="text-left position-fixed" id="msgs">
-
-        </div>
-
+        <div id="msgs" class="max-h-[800px] overflow-y-auto p-4 bg-gray-100 
+    border border-black rounded shadow-[7px_7px_0px_0_rgba(0,0,0,1)] mb-4
+    h-128 overflow-y-scroll">
         
+                
 
-        <form id="send" class="position-fixed bottom-0 start-50 translate-middle-x p-3 bg-dark" style="width: 75%;">
-            <div class="form-group">
-                <input id="submit" type="textbox" class="form-control form-control-lg" placeholder="Type something!">
+
             </div>
-        </form>
+       
         
+        
+        
+            <form id="send" class="w-full fixed bottom-0 left-0 right-0 p-3 bg-white flex items-center border-t border-black">
+                <div class="flex-grow mr-3">
+                    <div class="form-group">
+                        <input id="submit" type="text" class="border-2 rounded 
+                            focus:border-purple-500 
+                            hover:border-purple-300 
+                            form-control form-control-lg
+                            focus:shadow-[8px_8px_0px_0_rgba(0,0,0,1)]
+                            transition-all w-full"
+                            placeholder="Type something!">
+                    </div>
+                </div>
+            
+                
+                <div class="flex-shrink-0">
+                    <button id="night" type="button" class="border-1 border-dark bg-white py-2 px-4
+                    hover:border-purple-300 
+                    hover:shadow-[8px_8px_0px_0_rgba(0,0,0,1)] 
+                    transition-all">
+                    <svg id="moon" class="h-6 w-6 text-slate-900"  fill="none" viewBox="0 0 24 24" stroke="black">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                      </svg>
+                </button>
+                </div>
 
+
+                <div class="flex-shrink-0">
+                    <button id="settings" type="button" class="border-1 border-dark bg-white py-2 px-4
+                    hover:border-purple-400
+                    hover:shadow-[8px_8px_0px_0_rgba(0,0,0,1)] 
+                    transition-all">Profile</button>
+                </div>
+
+                <div class="flex-shrink-0">
+                    <button id="logout" type="button" class="border-1 border-dark bg-white py-2 px-4
+                    hover:border-purple-300 
+                    hover:shadow-[8px_8px_0px_0_rgba(0,0,0,1)] 
+                    transition-all">Logout</button>
+                </div>
+
+                
+            </form>
     
 
+    <script>
+       
+
+        const user = <%- JSON.stringify(user) %>;
+    </script>
     <script src="chat.js"></script>
+    
 </div>
 </body>
+
 </html>

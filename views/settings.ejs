@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+
+    
+    
+
+    <div id="profile" class="max-w-[700px] bg-gray-100 
+    border border-black rounded shadow-[7px_7px_0px_0_rgba(0,0,0,1)] 
+    h-auto w-full fixed p-6 
+    top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-y-6">
+
+    <div id="exit" class="absolute top-[-34px] left-[-34px] 
+    bg-white border border-1 rounded border-black 
+    hover:bg-gray-200 transition-all" onclick="">
+        <svg class="h-16 w-16 text-gray-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" 
+             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"/>  
+            <line x1="18" y1="6" x2="6" y2="18" />  
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+    </div>
+
+    <div class="absolute top-[-128px] left-[256px] z-10" id="alertmsg">
+        <% if (locals.errors) { %>
+            <!-- tailwindcss thingy -->
+            <div class="bg-red-200 rounded-none text-black px-4 py-3 mb-3 
+            rounded border border-black shadow-[5px_5px_0px_0_rgba(0,0,0,1)]" 
+            role="alert">
+                <strong class="font-bold">Error!</strong>
+                <p class="block"><% for (let error of errors) { %>
+                    <%= error %>
+                    <% } %></p>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="h-6 w-6
+                " id="errorbtn" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="hideError()"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+            </div>
+            <% } %>
+    </div>
+    
+       
+        <p class="font-bold text-xl pb-2 border-black border-b">User Information</p>
+
+        
+        <div class="flex items-center space-x-6 border-b border-gray-100">
+            
+            <label for="profile-upload" class="relative group cursor-pointer">
+                <img src="<%= user.profilepic %>" 
+                    class="w-64 h-64 rounded-full ring-2 ring-purple-500 shadow-[7px_7px_0px_0_rgba(0,0,0,1)] 
+                    hover:brightness-75 transition-all">
+
+                
+                <div class="absolute inset-0 bg-gray-800 rounded-full flex items-center justify-center 
+                    text-white text-sm font-semibold opacity-0 group-hover:opacity-70 transition-opacity duration-300">
+                    Select an image...
+                </div>
+            </label>
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" id="profile-upload" name="profilepic" class="hidden" accept="image/*">
+            </form>
+
+            
+            <div class="flex flex-col justify-center">
+                
+                <p class="text-lg font-medium">Name: <%= user.username %></p>
+                <p class="text-sm text-gray-600">
+                    Don't like your username? 
+                    <span id="change" class="underline text-purple-500 cursor-pointer">Change It!</span>
+                </p>
+                
+                
+                <p class="text-lg font-medium mt-2 border-b border-gray-400">ID: <%= user.id %></p>
+            </div>
+        </div>
+
+        
+        <div id="usernameform" class="opacity-0 pointer-events-none transition-all duration-300">
+            <form method="POST" action="/change" class="space-y-2">
+                <p class="text-md font-medium">New username:</p>
+                <input 
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight 
+                        focus:outline-none focus:bg-white focus:border-purple-500 focus:shadow-[4px_4px_0px_0_rgba(0,0,0,1)] 
+                        hover:bg-gray-100 hover:border-gray-300 hover:shadow-[2px_2px_0px_0_rgba(0,0,0,0.5)] 
+                        transition-all duration-300 ease-in-out" 
+                    id="username" name="username" placeholder="Enter new username">
+            </form>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+    const exitbutton = document.getElementById("exit").addEventListener("click", ()=>{
+        location.href = "./chat";
+    })
+    const enable = document.getElementById("change").addEventListener("click", ()=>{
+        if (document.getElementById("usernameform").classList.contains("opacity-0")){
+
+            
+        document.getElementById("usernameform").classList.remove("opacity-0", "pointer-events-none");
+         } else {
+            document.getElementById("usernameform").classList.add("opacity-0", "pointer-events-none");
+         }
+    });
+
+    const fileInput = document.getElementById('profile-upload');
+    const previewImage = document.querySelector('img');
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result; 
+            };
+            reader.readAsDataURL(file);
+        }
+
+        
+        document.getElementById('uploadForm').submit();
+    });
+
+</script>
+
+</html>

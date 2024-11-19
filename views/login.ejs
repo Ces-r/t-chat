@@ -1,24 +1,60 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/main.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
+
+
+
 <body class="bg-gray-50 min-h-screen flex justify-center items-center">
 
-    <div class="container flex justify-center flex-col items-center">
+
         
-        <h2 class="card-title text-left text-6xl font-bold mb-2">LOGIN</h2>
+        <div class="absolute top-0 left-50 z-10" id="alertmsg">
+            <% if (locals.errors) { %>
+                <!-- tailwindcss thingy -->
+                <div class="bg-red-200 border border-dark rounded-none text-black px-4 py-3 mb-3 rounded relative
+                border-dark shadow-[5px_5px_0px_0_rgba(0,0,0,1)]
+                " role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <p class="block"><% for (let error of errors) { %>
+                        <%= error %>
+                        <% } %></p>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="h-6 w-6
+                    " id="errorbtn" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="hideError()"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                </div>
+                <% } %>
+        </div>
+
+    
+    <div class="container flex justify-center flex-col items-center">
+
+
+
+
+
+        <h2 class="card-title text-left text-6xl font-bold mb-2 border-black border-b">LOGIN</h2>
+
+        
+                            
+                            
 
         <div class="flex justify-center items-center">
             <div class="row col-10 justify-content-md-center mt-5">
                 <div class="card rounded-none border-dark shadow-[10px_10px_0px_0_rgba(0,0,0,1)]" style="width: 36rem;">
                     <div class="card-body flex justify-center items-center h-full">
-                        <form class="w-full max-w-sm">
+                        
+                        
+                        <form method="POST" action="/login" class="w-full max-w-sm">
+                            
+
                             <!-- Username input -->
                             <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                    <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                                    <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4" for="lusername">
                                         Username
                                     </label>
                                 </div>
@@ -26,15 +62,16 @@
                                     <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-2 text-gray-700 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-purple-500 focus:shadow-[8px_8px_0px_0_rgba(0,0,0,1)]
                                     hover:bg-gray-100 hover:border-gray-100 hover:shadow-[2px_2px_0px_0_rgba(0,0,0,0.5)]
-                                    transition-all duration-300  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);" 
-                                    id="inline-full-name" type="text" placeholder="Username">
+                                    transition-all duration-300  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);" id="lusername" name="lusername" placeholder="Username">
                                 </div>
                             </div>
+
+
 
                             <!-- Password input -->
                             <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                    <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
+                                    <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4" for="lpassword">
                                         Password
                                     </label>
                                 </div>
@@ -42,8 +79,7 @@
                                     <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-2 text-gray-700 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-purple-500 focus:shadow-[8px_8px_0px_0_rgba(0,0,0,1)]
                                     hover:bg-gray-100 hover:border-gray-100 hover:shadow-[2px_2px_0px_0_rgba(0,0,0,0.5)]
-                                    transition-all duration-300  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);" 
-                                    id="inline-password" type="password" placeholder="******************">
+                                    transition-all duration-300  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);" id="lpassword" name="lpassword" type="password" placeholder="******************">
                                 </div>
                             </div>
 
@@ -69,9 +105,11 @@
         <!-- Register link -->
         <div class="flex justify-center items-center mt-7 border-dark w-full">
             <div class="text-xl pb-2 mb-2">
-                Don't have an account? <a id="registerText" style="color: #8b5cf6;" class="text-purple-500 font-bold" onclick="showRegister()">Register!</a>
+                Don't have an account? 
+                <a id="registerText" style="color: #8b5cf6; text-decoration: underline; cursor: pointer;" class="font-bold" onclick="showRegister()">Register!</a>
             </div>
         </div>
+        
         
     </div>
     
@@ -81,62 +119,62 @@
     <div class="absolute right-0 top-0 bg-black w-1/2 h-full z-0">
 
         <!-- RIGHT SIDE (Register Form) -->
-        <div id="rightside" class="container flex justify-center items-center h-screen flex-col opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out">
+        <div id="rightside" class="container flex justify-center items-center h-screen flex-col transition-opacity duration-500 ease-in-out opacity-0">
 
             <div class="text-white text-left items-center flex-col">
                 <!-- Form container --> 
-                <h2 class="card-title text-left text-6xl font-bold mb-2">REGISTER</h2>
+                <h2 class="card-title text-left text-6xl font-bold mb-1 border-b">REGISTER</h2>
                 <div class="flex justify-center items-center">
                     
-                    <div class="flex justify-center items-center">
-                        <div class="card rounded-none border-white shadow-[10px_10px_0px_0_rgba(255,255,255,1)] bg-black" style="width: 36rem;">
+                    <div class="row col-9 justify-content-md-center mt-11 py-1">
+                        <div class="row col-14 card rounded-none border-white shadow-[10px_10px_0px_0_rgba(255,255,255,1)] bg-black" style="width: 35rem; height: 19rem;">
                             <div class="card-body flex justify-center items-center h-full">
-                                <form class="w-full max-w-sm">
+                                
+                                <!-- the form -->
+                                <form method="POST" action="/register" class="w-full max-w-sm">
+                                    
                                     <!-- Username input -->
                                     <div class="md:flex md:items-center mb-6">
                                         <div class="md:w-1/3">
-                                            <label class="block text-white font-bold text-xl md:text-right pr-4">
+                                            <label class="block text-white font-bold text-l md:text-right pr-4">
                                                 Username
                                             </label>
                                         </div>
                                         <div class="md:w-2/3">
-                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-4 text-white leading-tight 
+                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-2 text-white leading-tight 
                                             focus:outline-none focus:bg-black focus:border-white focus:shadow-[8px_8px_0px_0_rgba(255, 255, 255, 1)]
                                             hover:bg-gray-700 hover:border-white hover:shadow-[2px_2px_0px_0_rgba(255, 255, 255, 0.5)]
-                                            transition-all duration-300 ease-in-out" 
-                                            id="registerusername" type="text" placeholder="Username">
+                                            transition-all duration-300 ease-in-out" id="rusername" name="rusername" type="text" placeholder="Username">
                                         </div>
                                     </div>
 
                                     <!-- Password input -->
                                     <div class="md:flex md:items-center mb-6">
                                         <div class="md:w-1/3">
-                                            <label class="block text-white font-bold text-xl md:text-right pr-4">
+                                            <label class="block text-white font-bold text-l md:text-right pr-4">
                                                 Password
                                             </label>
                                         </div>
                                         <div class="md:w-2/3">
-                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-4 text-white leading-tight 
+                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-2 text-white leading-tight 
                                             focus:outline-none focus:bg-black focus:border-white focus:shadow-[8px_8px_0px_0_rgba(255, 255, 255, 1)]
                                             hover:bg-gray-700 hover:border-white hover:shadow-[2px_2px_0px_0_rgba(255, 255, 255, 0.5)]
-                                            transition-all duration-300 ease-in-out" 
-                                            id="registerpassword" type="password" placeholder="******************">
+                                            transition-all duration-300 ease-in-out" id="rpassword" name="rpassword" type="password" placeholder="******************">
                                         </div>
                                     </div>
 
                                     <!-- Password confirmation input -->
                                     <div class="md:flex md:items-center mb-6">
                                         <div class="md:w-1/3">
-                                            <label class="block text-white font-bold text-xl md:text-right pr-4">
+                                            <label class="block text-white font-bold text-l md:text-right pr-4">
                                                 Confirm
                                             </label>
                                         </div>
                                         <div class="md:w-2/3">
-                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-4 text-white leading-tight 
+                                            <input class="bg-gray-800 appearance-none text-xl border-2 border-white rounded-none w-full py-2 px-2 text-white leading-tight 
                                             focus:outline-none focus:bg-black focus:border-white focus:shadow-[8px_8px_0px_0_rgba(255, 255, 255, 1)]
                                             hover:bg-gray-700 hover:border-white hover:shadow-[2px_2px_0px_0_rgba(255, 255, 255, 0.5)]
-                                            transition-all duration-300 ease-in-out" 
-                                            id="confirm-password" type="password" placeholder="******************">
+                                            transition-all duration-300 ease-in-out" id="confirm-password" name="cpassword" type="password" placeholder="******************">
                                         </div>
                                     </div>
 
@@ -162,7 +200,7 @@
         </div>
     </div>
 
-</body>
+
 
 <script>
     function showRegister() {
@@ -170,12 +208,19 @@
         
         if (rightSide.classList.contains("opacity-0")) {
             rightSide.classList.remove("opacity-0", "pointer-events-none");
-            rightSide.classList.add("opacity-100");
+            rightSide.classList.add("opacity-100 ");
         } else {
             rightSide.classList.add("opacity-0", "pointer-events-none");
             rightSide.classList.remove("opacity-100");
         }
     }
+
+    function hideError() {
+        const alert = document.getElementById("alertmsg")
+        alert.classList.add("opacity-0");
+        alert.innerHTML = ""
+    }
 </script>
 
-</html>
+
+</body></html>

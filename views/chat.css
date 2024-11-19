@@ -1,0 +1,51 @@
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff9f; 
+  border: 1px solid #000000;
+  border-radius: 2px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #757575; 
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+
+
+
+.tenor-gif-embed .tenor-gif-hover {
+    visibility: hidden !important;
+}
+
+
+.tenor-gif-embed iframe {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+.tenor-gif-embed {
+    position: relative;
+    overflow: hidden;
+    width: 294px; 
+    height: 294px; 
+    aspect-ratio: 1;
+}
